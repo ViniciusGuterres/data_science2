@@ -1,0 +1,11 @@
+select 
+	orders.customer_id,
+    customers.first_name,
+    order_details.product_id,
+    products.product_name,
+    order_details.quantity
+from
+	order_details
+inner join orders on orders.id = order_details.order_id
+inner join customer on orders.customer_id = customer.id
+inner join products on order_details.products = products.id;
