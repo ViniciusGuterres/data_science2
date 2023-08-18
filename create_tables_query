@@ -1,0 +1,101 @@
+create database multidim1;
+
+use multidim1;
+
+-- dim_vendedor
+DROP TABLE IF EXISTS `dim_vendedor`;
+
+CREATE TABLE `dim_vendedor` (
+  `tf_vendedor` bigint NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_vendedor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- dim_catproduto
+DROP TABLE IF EXISTS `dim_catproduto`;
+
+CREATE TABLE `dim_catproduto` (
+  `tf_catProduto` bigint NOT NULL AUTO_INCREMENT,
+  `catProduto` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_catProduto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- dim_cliente
+
+DROP TABLE IF EXISTS `dim_cliente`;
+
+CREATE TABLE `dim_cliente` (
+  `tf_cliente` bigint NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_cliente`)
+)
+;
+
+-- dim_data
+
+DROP TABLE IF EXISTS `dim_data`;
+
+CREATE TABLE `dim_data` (
+  `tf_data` bigint NOT NULL AUTO_INCREMENT,
+  `data_` date DEFAULT NULL,
+  PRIMARY KEY (`tf_data`)
+);
+
+-- dim_municipio
+
+DROP TABLE IF EXISTS `dim_municipio`;
+
+CREATE TABLE `dim_municipio` (
+  `tf_municipio` bigint NOT NULL AUTO_INCREMENT,
+  `municipio` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_municipio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- dim_produto
+
+DROP TABLE IF EXISTS `dim_produto`;
+
+CREATE TABLE `dim_produto` (
+  `tf_produto` bigint NOT NULL AUTO_INCREMENT,
+  `produto` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_produto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- dim_regiao
+
+DROP TABLE IF EXISTS `dim_regiao`;
+
+CREATE TABLE `dim_regiao` (
+  `tf_regiao` bigint NOT NULL AUTO_INCREMENT,
+  `regiao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_regiao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- dim_uf
+
+DROP TABLE IF EXISTS `dim_uf`;
+
+CREATE TABLE `dim_uf` (
+  `tf_uf` bigint NOT NULL AUTO_INCREMENT,
+  `uf` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tf_uf`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- fact_vendas
+
+DROP TABLE IF EXISTS `fact_vendas`;
+
+CREATE TABLE `fact_vendas` (
+  `tf_cliente` bigint DEFAULT NULL,
+  `tf_catProduto` bigint DEFAULT NULL,
+  `tf_produto` bigint DEFAULT NULL,
+  `tf_vendedor` bigint DEFAULT NULL,
+  `tf_data` bigint DEFAULT NULL,
+  `tf_regiao` bigint DEFAULT NULL,
+  `tf_uf` bigint DEFAULT NULL,
+  `tf_municipio` bigint DEFAULT NULL,
+  `valor` double DEFAULT NULL,
+  `quantidade` int DEFAULT NULL,
+  `lucro` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
