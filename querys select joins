@@ -1,11 +1,27 @@
+insert into multidim1.fact_vendas (tf_cliente, tf_catProduto, tf_produto, tf_vendedor, tf_data, tf_regiao, tf_uf, tf_municipio, valor, quantidade, lucro)
 select 
-	orders.customer_id,
-    customers.first_name,
-    order_details.product_id,
-    products.product_name,
-    order_details.quantity
+	multidim1.dim_cliente.tf_cliente,
+	multidim1.dim_catproduto.tf_catProduto,
+	multidim1.dim_produto.tf_produto,
+	multidim1.dim_vendedor.tf_vendedor,
+    multidim1.dim_data.tf_data,
+    multidim1.dim_regiao.tf_regiao,
+	multidim1.dim_uf.tf_uf,
+	multidim1.dim_municipio.tf_municipio,
+    order_details.unit_price * order_details.quantity as valor,
+    order_details.quantity as quantidade,
+    null as lucro
 from
 	order_details
 inner join orders on orders.id = order_details.order_id
-inner join customer on orders.customer_id = customer.id
-inner join products on order_details.products = products.id;
+inner join customers on orders.customer_id = customers.id
+inner join products on order_details.product_id = products.id
+inner join employees on orders.employee_id = employees.id
+join multidim1.dim_produto on products.product_name = multidim1.dim_produto.produto
+join multidim1.dim_cliente on CONCAT(customers.first_name, ' ', customers.last_name) = multidim1.dim_cliente.nome
+join multidim1.dim_vendedor on CONCAT(employees.first_name, ' ', employees.last_name) = multidim1.dim_vendedor.nome
+join multidim1.dim_catproduto on products.category = multidim1.dim_catproduto.catProduto
+join multidim1.dim_municipio on customers.city = multidim1.dim_municipio.municipio
+join multidim1.dim_regiao on customers.country_region = multidim1.dim_regiao.regiao
+join multidim1.dim_uf on customers.state_province = multidim1.dim_uf.uf
+left join multidim1.dim_data on orders.order_date = multidim1.dim_data.data_;
