@@ -48,5 +48,13 @@ def populate_multidim_tables(table_name, table_columns, multidim_table) :
         cursor_multidim1.execute(insert_query);
         connection_multidim1.commit();
 
+    print('Success:::::::: ')
 
-populate_multidim_tables('customers', ['first_name', 'last_name'], 'dim_cliente');
+
+# populate_multidim_tables('customers', ['first_name', 'last_name'], 'dim_cliente'); --- dim_cliente
+# populate_multidim_tables('products', ['product_name'], 'dim_produto'); --- dim_produto
+# populate_multidim_tables('employees', ['first_name', 'last_name'], 'dim_vendedor'); --- dim_vendedor
+# populate_multidim_tables('products', ['category'], 'dim_catproduto'); --- dim_catproduto
+# populate_multidim_tables('customers', ['city'], 'dim_municipio'); # dim_municipio
+# populate_multidim_tables('customers', ['state_province'], 'dim_uf'); # dim_uf
+# populate_multidim_tables('customers', ['country_region'], 'dim_regiao'); # dim_regiao
